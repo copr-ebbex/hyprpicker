@@ -1,5 +1,5 @@
 Name:           hyprpicker
-Version:        0.2.0
+Version:        0.3.0
 Release:        %autorelease
 Summary:        A wlroots-compatible Wayland color picker
 # LICENSE: BSD-3-Clause
@@ -20,6 +20,8 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(xkbcommon)
 
+Recommends:     wl-clipboard
+
 %description
 %{summary}.
 
@@ -29,19 +31,19 @@ BuildRequires:  pkgconfig(xkbcommon)
 
 
 %build
-make protocols
-%cmake
+%cmake -DCMAKE_INSTALL_MANDIR=%{_mandir}
 %cmake_build
 
 
 %install
-install -m0755 -Dp %{_vpath_builddir}/%{name} %{buildroot}%{_bindir}/%{name}
+%cmake_install
 
 
 %files
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
+%{_mandir}/man1/%{name}.1.*
 
 
 %changelog
