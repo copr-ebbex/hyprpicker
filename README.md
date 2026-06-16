@@ -1,0 +1,3 @@
+# hyprpicker
+
+The hyprpicker package
